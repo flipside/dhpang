@@ -34,6 +34,7 @@
 		var observationsNextHref;
 		var observationsPrevHref;
 		var observationsGlucose;
+		var observationsWeight;
 		
 		/* The login function authenticates a user given a username and password and after a token has been retrieved. */
 		var login = function(userName,password,accessToken) { 
@@ -170,6 +171,21 @@
 				});
 			};
 
+					/* This the observations function for retrieving glucose observations for the graph. */			
+		this.observationsWeight = function() {
+			$http({
+				url: BASE_URL_OBSERVATION + '?subject:_id=' + patient_id + '&name=' + WEIGHT_LOINC + '&_sort:asc=date&_count=200',
+				method: "GET",
+				headers: {'Authorization':'Bearer ' + accessToken,'Accept':'application/json'}
+				}).success(function (data, status, headers, config) {
+					console.log(data);
+					observationsWeight = data;
+					$rootScope.$broadcast("weightObsSuccess");
+				}).error(function (data, status, headers, config) {
+					console.log(data);
+				});
+			};
+
 		/* This is the first function called to retrieve an application token.  Once a token is retrieved then it
 		   makes a call to authenticate the user via the login function.										*/			
 		this.token = function(username, password) { 
@@ -215,5 +231,8 @@
 		}
 		this.getGlucoseObservationsData = function () {
 			return observationsGlucose;
+		}		
+		this.getWeightObservationsData = function () {
+			return observationsWeight;
 		}		
 	});

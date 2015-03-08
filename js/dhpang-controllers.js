@@ -255,7 +255,8 @@
 		$scope.graphShow = false;
 				
 		$scope.getGraph = function() {
-			DHPService.observationsGlucose();
+			//DHPService.observationsGlucose();
+			DHPService.observationsWeight();
 		};
 
 		$scope.$on('Successful logout', function() {
@@ -273,7 +274,7 @@
 			$scope.graphShow = true;
 		});
 		
-		$scope.$on('glucoseObsSuccess', function () {
+		$scope.$on('weightObsSuccess', function () {
 
 			var resultsCount;
 			var obsList = [];
@@ -283,7 +284,7 @@
 			var times = [];
 			var readings = [];
 			
-			$.each( DHPService.getGlucoseObservationsData(), function( key, val ) {
+			$.each( DHPService.getWeightObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
 					resultsCount = val;
 				}
@@ -326,10 +327,10 @@
 						
 			$scope.labels = times;
 			if (resultsCount > 0) {
-				$scope.series = ['Glucose Observations'];
+				$scope.series = ['Weight Observations'];
 			} 
 			else {
-				$scope.nograph = "There are no glucose observations for graphing."
+				$scope.nograph = "There are no weight observations for graphing."
 			}
 			$scope.data = [
 				readings

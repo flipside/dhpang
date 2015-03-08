@@ -34,5 +34,8 @@
 	var BASE_URL_PATIENT = BASE_FHIR_INFO_URL + "/Patient/";
 	var BASE_URL_ORGANIZATION = BASE_FHIR_INFO_URL + "/Organization/";
 	var BASE_URL_OBSERVATION = BASE_FHIR_INFO_URL + "/Observation";
-
+	
 	var GLUCOSE_LOINC = "2339-0";
+	var WEIGHT_LOINC = "3141-9";
+	var STEPS_LOINC = "41950-7";
+	var SLEEP_LOINC = "8455148";
