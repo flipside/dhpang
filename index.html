@@ -272,25 +272,31 @@
         <br/>
         <br/>
         <br/>
-        <h2 class="sub-header">Team Running Dead Data</h2>
-
+        <h2 class="sub-header">Team Aggregate</h2>
 
     	 <div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="WeightGraphController">
-    	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getWeightGraph()">Get/Refresh Weight Graph</button>
-    	   <div class="text-center"><div ng-nograph></div></div>
-    	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="false" series="series" click="onClick"></canvas>
+            <h3 class="sub-header">Weight Aggregate
+    	  <button class="btn btn-lg btn-primary pull-right" id="refreshGraph" ng-hide="buttonHide" type="button" ng-click="getWeightGraph()">Get Weight Graph</button>
+            </h3>
+
+          <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="false" series="series" click="onClick"></canvas>
+           <div class="text-center"><div ng-nograph></div></div>
     	</div>
 
     	<div id="graphDiv2" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="StepsGraphController">
-    	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph2" type="button" ng-click="getStepsGraph()">Get/Refresh Steps Graph</button>
-    	   <div class="text-center"><div ng-nograph></div></div>
-    	  <canvas id="line2" class="chart chart-line" data="data" labels="labels" legend="false" series="series" click="onClick"></canvas>
+            <h3 class="sub-header">Step Aggregate
+    	  <button class="btn btn-lg btn-primary pull-right" id="refreshGraph2" ng-hide="buttonHide"  type="button" ng-click="getStepsGraph()">Get Steps Graph</button>
+            </h3>
+          <canvas id="line2" class="chart chart-line" data="data" labels="labels" legend="false" series="series" click="onClick"></canvas>
+           <div class="text-center"><div ng-nograph></div></div>
     	</div>
 
     	<div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="SleepGraphController">
-    	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getSleepGraph()">Get/Refresh Sleep Graph</button>
-    	   <div class="text-center"><div ng-nograph></div></div>
-    	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="false" series="series" click="onClick"></canvas>
+            <h3 class="sub-header">Sleep Aggregate
+    	   <button class="btn btn-lg btn-primary pull-right" id="refreshGraph" ng-hide="buttonHide" type="button" ng-click="getSleepGraph()">Get Sleep Graph</button>
+            </h3>
+          <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="false" series="series" click="onClick"></canvas>
+           <div class="text-center"><div ng-nograph></div></div>
     	</div>
     	<!-- End of graph template -->
       </div>

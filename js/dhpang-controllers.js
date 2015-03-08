@@ -259,10 +259,11 @@
 	/* The graph controller retrieves graph data and sets the $scope model for the graph view. */
 	dhp.controller('WeightGraphController', function ($scope, $window, $timeout, DHPService) {
 		$scope.graphShow = false;
+		$scope.buttonHide = false;
 
 		$scope.getWeightGraph = function() {
-			//DHPService.observationsGlucose();
 			DHPService.observationsWeight();
+			$scope.buttonHide = true;
 		};
 
 		$scope.$on('Successful logout', function() {
@@ -366,9 +367,11 @@
 	/* The graph controller retrieves graph data and sets the $scope model for the graph view. */
 	dhp.controller('SleepGraphController', function ($scope, $window, $timeout, DHPService) {
 		$scope.graphShow = false;
+		$scope.buttonHide = false;
 
 		$scope.getSleepGraph = function() {
 			DHPService.observationsSleep();
+			$scope.buttonHide = true;
 		};
 
 		$scope.$on('Successful logout', function() {
@@ -471,11 +474,13 @@
 		/* The graph controller retrieves graph data and sets the $scope model for the graph view. */
 	dhp.controller('StepsGraphController', function ($scope, $window, $timeout, DHPService) {
 		$scope.graphShow = false;
+		$scope.buttonHide = false;
 
 
 		$scope.getStepsGraph = function() {
 			//DHPService.observationsGlucose();
 			DHPService.observationsSteps();
+			$scope.buttonHide = true;
 		};
 
 		$scope.$on('Successful logout', function() {
