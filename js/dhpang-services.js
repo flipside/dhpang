@@ -174,7 +174,7 @@
 					/* This the observations function for retrieving glucose observations for the graph. */			
 		this.observationsWeight = function() {
 			$http({
-				url: BASE_URL_OBSERVATION + '?subject:_id=' + patient_id + '&name=' + WEIGHT_LOINC + '&_sort:asc=date&_count=200',
+				url: BASE_URL_OBSERVATION + '?subject:_id=' + patient_id + '&name=' + WEIGHT_LOINC + '&date=>2014-01-01&date=<2014-09-01',
 				method: "GET",
 				headers: {'Authorization':'Bearer ' + accessToken,'Accept':'application/json'}
 				}).success(function (data, status, headers, config) {
@@ -185,6 +185,33 @@
 					console.log(data);
 				});
 			};
+		this.observationsSteps = function() {
+		$http({
+			url: BASE_URL_OBSERVATION + '?subject:_id=' + patient_id + '&name=' + STEPS_LOINC + '&_sort:asc=date&_count=200',
+			method: "GET",
+			headers: {'Authorization':'Bearer ' + accessToken,'Accept':'application/json'}
+			}).success(function (data, status, headers, config) {
+				console.log(data);
+				observationsSteps = data;
+				$rootScope.$broadcast("stepsObsSuccess");
+			}).error(function (data, status, headers, config) {
+				console.log(data);
+			});
+		};
+
+		this.observationsSleep = function() {
+		$http({
+			url: BASE_URL_OBSERVATION + '?subject:_id=' + patient_id + '&name=' + SLEEP_LOINC + '&_sort:asc=date&_count=200',
+			method: "GET",
+			headers: {'Authorization':'Bearer ' + accessToken,'Accept':'application/json'}
+			}).success(function (data, status, headers, config) {
+				console.log(data);
+				observationsSleep= data;
+				$rootScope.$broadcast("sleepObsSuccess");
+			}).error(function (data, status, headers, config) {
+				console.log(data);
+			});
+		};
 
 		/* This is the first function called to retrieve an application token.  Once a token is retrieved then it
 		   makes a call to authenticate the user via the login function.										*/			
@@ -235,4 +262,10 @@
 		this.getWeightObservationsData = function () {
 			return observationsWeight;
 		}		
+		this.getSleepObservationsData = function () {
+			return observationsSleep;
+		}	
+		this.getStepsObservationsData = function () {
+			return observationsSteps;
+		}	
 	});

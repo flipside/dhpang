@@ -30,6 +30,8 @@
   
 		$scope.signInShow = true;
 		$scope.failedLoginShow = false;
+		$scope.userName = "mark.taylor";
+		$scope.password = "Going4ther$";
 		
 		$scope.loginUser = function () {
 			DHPService.token($scope.userName, $scope.password);
@@ -250,11 +252,12 @@
 		});
 	});
 	
+	//WEIGHT
 	/* The graph controller retrieves graph data and sets the $scope model for the graph view. */
-	dhp.controller('GraphController', function ($scope, $window, $timeout, DHPService) {
+	dhp.controller('WeightGraphController', function ($scope, $window, $timeout, DHPService) {
 		$scope.graphShow = false;
 				
-		$scope.getGraph = function() {
+		$scope.getWeightGraph = function() {
 			//DHPService.observationsGlucose();
 			DHPService.observationsWeight();
 		};
@@ -274,7 +277,101 @@
 			$scope.graphShow = true;
 		});
 		
+
+		//weight observations
 		$scope.$on('weightObsSuccess', function () {
+
+			var resultsCount;
+			var obsList = [];
+			var k = 0;
+			var links = [];
+			var linkObj = {};
+			var times = [];
+			var readings = [[],[]];
+			
+			$.each( DHPService.getWeightObservationsData(), function( key, val ) {
+				if (key === "totalResults") {
+					resultsCount = val;
+				}
+				/* The code below can be expanded if one wanted to page the data and/or retrieve additional results. */
+				if (key === "link") {
+					for (j=0; j<val.length; j++) {
+						if (val[j]['rel'] === 'next') {
+							linkObj['id'] = j;
+							linkObj['href'] = val[j]['href'];
+							linkObj['rel'] = val[j]['rel'];
+							
+							links.push(linkObj);
+						}
+					}
+				}
+				if (key === "entry") {
+					for (i = 0; i < val.length; i++) {
+
+							var obs = {};
+							var vals = [];
+							
+							obs['id'] = k++;
+							
+							vals = dhpUtils.getObjects(val[i], 'value');
+							for (p=0;p<vals.length;p++) {
+									obs['value'] = vals[p]['value'];
+									readings[0].push(vals[p]['value']);
+									readings[1].push(vals[p]['value']*.9);
+
+							}
+							vals = dhpUtils.getObjects(val[i], 'appliesDateTime');
+							if (vals.length > 0) {
+								for (p=0;p<vals.length;p++) {
+										obs['datetime'] = vals[p]['appliesDateTime'];
+										times.push(vals[p]['appliesDateTime']);
+								}
+							}		
+							obsList.push(obs);		
+					}
+				}	
+			});
+						
+			$scope.labels = times;
+			if (resultsCount > 0) {
+				$scope.series = ['Weight Observations A', 'Weight Observations B'];
+			} 
+			else {
+				$scope.nograph = "There are no weight observations for graphing."
+			}
+			$scope.data =
+				readings;
+		});
+	});
+	
+		/* The graph controller retrieves graph data and sets the $scope model for the graph view. */
+	dhp.controller('StepsGraphController', function ($scope, $window, $timeout, DHPService) {
+		$scope.graphShow = false;
+				
+
+		$scope.getStepsGraph = function() {
+			//DHPService.observationsGlucose();
+			DHPService.observationsSteps();
+		};
+
+		$scope.$on('Successful logout', function() {
+		
+			$timeout(function () {
+				$window.location.reload();
+			}, 2000);
+		
+			$scope.graphShow = false;
+			
+
+		});
+		
+		$scope.$on('Successful patient', function () {
+			$scope.graphShow = true;
+		});
+
+
+		//steps observations
+		$scope.$on('stepsObsSuccess', function () {
 
 			var resultsCount;
 			var obsList = [];
@@ -284,7 +381,7 @@
 			var times = [];
 			var readings = [];
 			
-			$.each( DHPService.getWeightObservationsData(), function( key, val ) {
+			$.each( DHPService.getStepsObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
 					resultsCount = val;
 				}
@@ -327,10 +424,10 @@
 						
 			$scope.labels = times;
 			if (resultsCount > 0) {
-				$scope.series = ['Weight Observations'];
+				$scope.series = ['Steps Observations'];
 			} 
 			else {
-				$scope.nograph = "There are no weight observations for graphing."
+				$scope.nograph = "There are no steps observations for graphing."
 			}
 			$scope.data = [
 				readings

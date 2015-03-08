@@ -99,32 +99,18 @@
 	  </div></div>
 	</div>
 	<br/>
-	<!-- End of patient demographic information template -->
-	<!-- Template for displaying observations -->
-    <div id="observationsDiv" class="container-fluid" class="observations" ng-show="observationsShow" ng-controller="ObservationsController">
-    <form id="observationsForm" class="form-observations">  
-	  <button class="btn btn-lg btn-primary btn-block" id="refreshObservations" type="button" ng-click="getObservations()">Get/Refresh Observations</button>
-	  <br/>
-	  <button type="button" class="btn btn-primary pull-right" type="button" ng-click="getObservationsNext()" ng-show="showNext">Next >></button>
-	  <button type="button" class="btn btn-primary pull-left" type="button" ng-click="getObservationsPrevious()" ng-show="showPrevious"><< Previous</button>
-	  <br/>
-	  <div class="text-center"><div ng-totalresults></div></div>
-	  <table class="table table-striped">
-	  <tbody>
-	  <tr ng-repeat="obs in obsTable track by $index">
-	  <td>{{obs.display}}<br/>{{obs.datetime}}</td><td>{{obs.value}}&nbsp;{{obs.units}}<br/>Status:{{obs.status}} Rel:{{obs.reliability}}</td>
-	  </tr>
-	  </tbody>
-	  </table>
-      <p></p>
-    </form>
-	</div>
 	<!-- End of observations template -->
 	<!-- Template for displaying graph -->
-	 <div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="GraphController">
-	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getGraph()">Get/Refresh Glucose Graph</button>
+	 <div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="WeightGraphController">
+	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getWeightGraph()">Get/Refresh Weight Graph</button>
 	   <div class="text-center"><div ng-nograph></div></div>
 	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+	</div>
+
+	<div id="graphDiv2" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="StepsGraphController">
+	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph2" type="button" ng-click="getStepsGraph()">Get/Refresh Steps Graph</button>
+	   <div class="text-center"><div ng-nograph></div></div>
+	  <canvas id="line2" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
 	</div>
 	<!-- End of graph template -->
   </body>
