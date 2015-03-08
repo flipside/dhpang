@@ -95,9 +95,9 @@
           <ul class="nav nav-sidebar">
             <li class="active"><a href="">Teams</a></li>
             <li ><a href="">Team Running Dead</a></li>
-            <li><a href="">Team IT Crowd</a></li>
             <li><a href="">Team Hollywood</a></li>
             <li><a href="">Team Avengers</a></li>
+            <li><a href="">Team IT Crowd</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href="">Team Running Dead</a></li>
@@ -129,7 +129,7 @@
             <div class="col-xs-6 col-sm-3 d-col">
               <canvas id="doughnut1" class="" width="200" height="200"></canvas>
               <h4>Team Running Dead</h4>
-              <span class="text-muted"> Health Progress </span>
+              <span class="text-muted"> 1st Place </span>
               <script>
                   var c = document.getElementById("doughnut1");
                     var ctx = c.getContext("2d");
@@ -153,35 +153,9 @@
               </script>
             </div>
             <div class="col-xs-6 col-sm-3  d-col">
-              <canvas id="doughnut2" class="" width="200" height="200"></canvas>
-              <h4>Team IT Crowd</h4>
-              <span class="text-muted">Health Progress</span>
-              <script>
-                  var c = document.getElementById("doughnut2");
-                    var ctx = c.getContext("2d");
-                    var data = [
-                        {
-                            value: 65,
-                            color:"#46BFBD",
-                            highlight: "#5AD3D1",
-                            label: "Completed"
-                        },
-                        {
-                            value: 35,
-                            color: "#a8a8a8",
-                            highlight: "#d3d3d3",
-                            label: "Remaining"
-                        }
-                    ];
-                    var myDoughnutChart = new Chart(ctx).Doughnut(data,{
-                        percentageInnerCutout : 70
-                    });
-              </script>
-            </div>
-            <div class="col-xs-6 col-sm-3  d-col">
               <canvas id="doughnut3" class="" width="200" height="200"></canvas>
               <h4>Team Hollywood</h4>
-              <span class="text-muted">Health Progress</span>
+              <span class="text-muted">2nd Place</span>
               <script>
                   var c = document.getElementById("doughnut3");
                     var ctx = c.getContext("2d");
@@ -207,7 +181,7 @@
             <div class="col-xs-6 col-sm-3 d-col">
               <canvas id="doughnut4" class="" width="200" height="200"></canvas>
               <h4>Team Avengers</h4>
-              <span class="text-muted">Health Progress</span>
+              <span class="text-muted">3rd Place</span>
               <script>
                   var c = document.getElementById("doughnut4");
                     var ctx = c.getContext("2d");
@@ -222,6 +196,32 @@
                             value: 22,
                             color: "#a8a8a8",
                             highlight: "#f6f6f6",
+                            label: "Remaining"
+                        }
+                    ];
+                    var myDoughnutChart = new Chart(ctx).Doughnut(data,{
+                        percentageInnerCutout : 70
+                    });
+              </script>
+            </div>
+            <div class="col-xs-6 col-sm-3  d-col">
+              <canvas id="doughnut2" class="" width="200" height="200"></canvas>
+              <h4>Team IT Crowd</h4>
+              <span class="text-muted">4th Place</span>
+              <script>
+                  var c = document.getElementById("doughnut2");
+                    var ctx = c.getContext("2d");
+                    var data = [
+                        {
+                            value: 65,
+                            color:"#46BFBD",
+                            highlight: "#5AD3D1",
+                            label: "Completed"
+                        },
+                        {
+                            value: 35,
+                            color: "#a8a8a8",
+                            highlight: "#d3d3d3",
                             label: "Remaining"
                         }
                     ];
