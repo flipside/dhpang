@@ -93,16 +93,18 @@
             <li><a href="#">Export</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="">Team Running Dead</a></li>
+            <li class="active"><a href="">Teams</a></li>
+            <li ><a href="">Team Running Dead</a></li>
+            <li><a href="">Team IT Crowd</a></li>
+            <li><a href="">Team Hollywood</a></li>
+            <li><a href="">Team Avengers</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Team Running Dead</a></li>
             <li><a href="">Weight Progres</a></li>
             <li><a href="">Steps Progres</a></li>
             <li><a href="">Sleep Progres</a></li>
           </ul>
-          <!-- <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul> -->
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
@@ -123,137 +125,113 @@
 
           <!-- Template for displaying patient demographic information -->
         <div id="patientDiv" class="" class="patient" ng-show="patientShow" ng-controller="PatientController">
-          <h2 class="sub-header">Info</h2>
           <div class="row placeholders doughnuts">
             <div class="col-xs-6 col-sm-3 d-col">
               <canvas id="doughnut1" class="" width="200" height="200"></canvas>
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Team Running Dead</h4>
+              <span class="text-muted"> Health Progress </span>
               <script>
                   var c = document.getElementById("doughnut1");
                     var ctx = c.getContext("2d");
                     var data = [
                         {
-                            value: 300,
-                            color:"#F7464A",
-                            highlight: "#FF5A5E",
-                            label: "Red"
-                        },
-                        {
-                            value: 50,
-                            color: "#46BFBD",
+                            value: 83,
+                            color:"#46BFBD",
                             highlight: "#5AD3D1",
-                            label: "Green"
+                            label: "Completed"
                         },
                         {
-                            value: 100,
-                            color: "#FDB45C",
-                            highlight: "#FFC870",
-                            label: "Yellow"
+                            value: 17,
+                            color: "#a8a8a8",
+                            highlight: "#d3d3d3",
+                            label: "Remaining"
                         }
                     ];
                     var myDoughnutChart = new Chart(ctx).Doughnut(data,{
+                        percentageInnerCutout : 70
                     });
               </script>
             </div>
             <div class="col-xs-6 col-sm-3  d-col">
               <canvas id="doughnut2" class="" width="200" height="200"></canvas>
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Team IT Crowd</h4>
+              <span class="text-muted">Health Progress</span>
               <script>
                   var c = document.getElementById("doughnut2");
                     var ctx = c.getContext("2d");
                     var data = [
                         {
-                            value: 300,
-                            color:"#F7464A",
-                            highlight: "#FF5A5E",
-                            label: "Red"
-                        },
-                        {
-                            value: 50,
-                            color: "#46BFBD",
+                            value: 65,
+                            color:"#46BFBD",
                             highlight: "#5AD3D1",
-                            label: "Green"
+                            label: "Completed"
                         },
                         {
-                            value: 100,
-                            color: "#FDB45C",
-                            highlight: "#FFC870",
-                            label: "Yellow"
+                            value: 35,
+                            color: "#a8a8a8",
+                            highlight: "#d3d3d3",
+                            label: "Remaining"
                         }
                     ];
                     var myDoughnutChart = new Chart(ctx).Doughnut(data,{
+                        percentageInnerCutout : 70
                     });
               </script>
             </div>
             <div class="col-xs-6 col-sm-3  d-col">
               <canvas id="doughnut3" class="" width="200" height="200"></canvas>
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Team Hollywood</h4>
+              <span class="text-muted">Health Progress</span>
               <script>
                   var c = document.getElementById("doughnut3");
                     var ctx = c.getContext("2d");
                     var data = [
                         {
-                            value: 300,
-                            color:"#F7464A",
-                            highlight: "#FF5A5E",
-                            label: "Red"
-                        },
-                        {
-                            value: 50,
-                            color: "#46BFBD",
+                            value: 81,
+                            color:"#46BFBD",
                             highlight: "#5AD3D1",
-                            label: "Green"
+                            label: "Completed"
                         },
                         {
-                            value: 100,
-                            color: "#FDB45C",
-                            highlight: "#FFC870",
-                            label: "Yellow"
+                            value: 19,
+                            color: "#a8a8a8",
+                            highlight: "#d3d3d3",
+                            label: "Remaining"
                         }
                     ];
                     var myDoughnutChart = new Chart(ctx).Doughnut(data,{
+                        percentageInnerCutout : 70
                     });
               </script>
             </div>
             <div class="col-xs-6 col-sm-3 d-col">
               <canvas id="doughnut4" class="" width="200" height="200"></canvas>
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Team Avengers</h4>
+              <span class="text-muted">Health Progress</span>
               <script>
                   var c = document.getElementById("doughnut4");
                     var ctx = c.getContext("2d");
                     var data = [
                         {
-                            value: 300,
-                            color:"#F7464A",
-                            highlight: "#FF5A5E",
-                            label: "Red"
-                        },
-                        {
-                            value: 50,
-                            color: "#46BFBD",
+                            value: 78,
+                            color:"#46BFBD",
                             highlight: "#5AD3D1",
-                            label: "Green"
+                            label: "Completed"
                         },
                         {
-                            value: 100,
-                            color: "#FDB45C",
-                            highlight: "#FFC870",
-                            label: "Yellow"
+                            value: 22,
+                            color: "#a8a8a8",
+                            highlight: "#f6f6f6",
+                            label: "Remaining"
                         }
                     ];
                     var myDoughnutChart = new Chart(ctx).Doughnut(data,{
+                        percentageInnerCutout : 70
                     });
               </script>
             </div>
           </div>
-             <!-- <img src="images/PlainPhillips145x38.png" alt="Philips API's" /> -->
-<!--              <button id="logoutButton" class="btn btn-primary pull-right" type="button" ng-click="logoutUser()">Logout</button>
- -->              <!-- <button class="btn btn-lg btn-primary btn-block" id="refreshPatient" type="button" ng-click="getPatient()">Get/Refresh Person Info</button> -->
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-6 h4">Status</div>
                 <div class="col-md-6 h4">Gender</div>
               </div>
@@ -285,14 +263,19 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6  bg-info" ng-birthdate></div>
-                  <!-- Organization information - Note that this is a separate service, but included in the Patient view. -->
                     <div class="col-md-6  bg-info" ng-organization>
                     </div>
                 </div>
-            <br/>
+             -->
             <!-- End of observations template -->
         </div>
     	<!-- Template for displaying graph -->
+        <br/>
+        <br/>
+        <br/>
+        <h2 class="sub-header">Team Running Dead Data</h2>
+
+
     	 <div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="WeightGraphController">
     	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getWeightGraph()">Get/Refresh Weight Graph</button>
     	   <div class="text-center"><div ng-nograph></div></div>
