@@ -36,6 +36,9 @@
 		$scope.loginUser = function () {
 			DHPService.token($scope.userName, $scope.password);
 		};
+
+		DHPService.token($scope.userName, $scope.password);
+
 		$scope.$on('Successful patient', function() {
 			$scope.userName = "";
 			$scope.password = "";
