@@ -454,7 +454,7 @@
 			for (i=0; i < readings[0].length; i++) {
 				avg = parseInt(readings[0][i]) + parseInt(readings[1][i]) + parseInt(readings[2][i]) + parseInt(readings[3][i]);
 				// console.log(avg);
-				avgs.push((avg/4).toFixed(2));
+				avgs.push((avg/4/60).toFixed(2));
 			}
 			$scope.labels = times;
 			if (resultsCount > 0) {
