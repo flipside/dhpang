@@ -1,0 +1,131 @@
+<!--
+* Copyright (c) 2014-2015 Koninklijke Philips N.V.
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+* 
+ * The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+* 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*
+* Philips HTML5 Angular Sample Application - DHP
+*
+* Below is the main html page that defines the views for the DHP Angular applications.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Philips HTML5 Angular Application - DHP</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/dhpang.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="js/dhpang-constants.js"></script>
+	<script src="js/Base64.js"></script>
+	<script src="js/dhpang.js"></script>
+	<script src="js/dhpang-utils.js"></script>
+	<script src="js/dhpang-directives.js"></script>
+	<script src="js/dhpang-services.js"></script>
+	<script src="js/dhpang-controllers.js"></script>
+	<script src="js/Chart.min.js"></script> 
+	<script src="js/angular-chart.js"></script>
+  </head>
+  <!-- Declare the app as dhp -->
+  <body ng-app="dhp">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+	<!-- Template for the initial login -->
+	<div id="signInDiv" class="wrapper" ng-controller="LoginController" ng-show="signInShow">
+    <form id="signinForm" class="form-signin">  
+	  <img src="images/philips-logo.png" alt="Philips API's" />	
+      <h2 class="form-signin-heading"></h2>
+      <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" ng-model="userName" />
+      <input type="password" class="form-control" name="password" placeholder="Password" required="" ng-model="password" />
+      <p></p>
+      <button id="loginButton" class="btn btn-lg btn-primary btn-block" type="button" ng-click="loginUser()">Login</button>
+	  <br/>
+	  <p class="text-danger" ng-show="failedLoginShow">There was an error with your login.  Please try again.</p>
+    </form>
+	</div>
+	<!-- End of intial login template -->
+	<!-- Template for displaying patient demographic information -->
+  	 <div id="patientDiv" class="container-fluid" class="patient" ng-show="patientShow" ng-controller="PatientController">
+	 <img src="images/PlainPhillips145x38.png" alt="Philips API's" />
+	 <button id="logoutButton" class="btn btn-primary pull-right" type="button" ng-click="logoutUser()">Logout</button>	
+	  <button class="btn btn-lg btn-primary btn-block" id="refreshPatient" type="button" ng-click="getPatient()">Get/Refresh Person Info</button>
+	  <div class="row"><div class="col-md-6 h4">Status</div><div class="col-md-6 h4">Gender</div></div>
+	  <div class="row">
+	  <div class="col-md-6 bg-info" ng-status>
+	  </div>
+	  <div class="col-md-6 bg-info" ng-gender>
+	  </div></div>
+	  <div class="row"><div class="col-md-6 h4">Name(s)</div><div class="col-md-6 h4">Telecom</div></div>
+	  <div class="row">
+      <div class="col-md-6  bg-info" ng-names></div>
+	  <div class="col-md-6  bg-info" ng-phones>
+	  </div></div>
+	  <div class="row"><div class="col-md-12 h4">Address(es)</div></div>
+	  <div class="row">
+	  <div class="col-md-12  bg-info" ng-addresses></div>
+	  </div>
+	  <div class="row"><div class="col-md-6 h4">Birth Date:</div><div class="col-md-6 h4">Organization</div></div>
+	  <div class="row">
+	  <div class="col-md-6  bg-info" ng-birthdate></div>
+	  <!-- Organization information - Note that this is a separate service, but included in the Patient view. -->
+	  <div class="col-md-6  bg-info" ng-organization>
+	  </div></div>
+	</div>
+	<br/>
+	<!-- End of patient demographic information template -->
+	<!-- Template for displaying observations -->
+    <div id="observationsDiv" class="container-fluid" class="observations" ng-show="observationsShow" ng-controller="ObservationsController">
+    <form id="observationsForm" class="form-observations">  
+	  <button class="btn btn-lg btn-primary btn-block" id="refreshObservations" type="button" ng-click="getObservations()">Get/Refresh Observations</button>
+	  <br/>
+	  <button type="button" class="btn btn-primary pull-right" type="button" ng-click="getObservationsNext()" ng-show="showNext">Next >></button>
+	  <button type="button" class="btn btn-primary pull-left" type="button" ng-click="getObservationsPrevious()" ng-show="showPrevious"><< Previous</button>
+	  <br/>
+	  <div class="text-center"><div ng-totalresults></div></div>
+	  <table class="table table-striped">
+	  <tbody>
+	  <tr ng-repeat="obs in obsTable track by $index">
+	  <td>{{obs.display}}<br/>{{obs.datetime}}</td><td>{{obs.value}}&nbsp;{{obs.units}}<br/>Status:{{obs.status}} Rel:{{obs.reliability}}</td>
+	  </tr>
+	  </tbody>
+	  </table>
+      <p></p>
+    </form>
+	</div>
+	<!-- End of observations template -->
+	<!-- Template for displaying graph -->
+	 <div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="GraphController">
+	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getGraph()">Get/Refresh Glucose Graph</button>
+	   <div class="text-center"><div ng-nograph></div></div>
+	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+	</div>
+	<!-- End of graph template -->
+  </body>
+</html>
