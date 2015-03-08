@@ -136,7 +136,7 @@ body {
 
 .wrapper {
 	margin-top: 80px;
-  margin-bottom: 80px;
+    margin-bottom: 80px;
 }
 
 .form-signin {
@@ -178,6 +178,8 @@ body {
 
 .doughnuts canvas {
     padding: 20px;
+    position: relative;
+    left: -5%;
 }
 
 .d-col {
