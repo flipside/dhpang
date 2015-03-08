@@ -6,10 +6,10 @@
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
  * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -17,22 +17,22 @@
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
-* 
+*
 * Philips HTML5 Angular Application
-* 	
+*
 * The controllers provide the necessary linkage between the DHPService and the front end views.
-*/	
-	
+*/
+
 	/* The login controller retrieves a token via the token function.  The token function calls the login function which then
-	   broadcasts a message as to whether or not a user was successful in logging in or not.  If successful then the Patient controller 
+	   broadcasts a message as to whether or not a user was successful in logging in or not.  If successful then the Patient controller
 	   and the Observations controller will both retrieve data for the patient.													*/
 	dhp.controller('LoginController', function ($scope, DHPService) {
-  
+
 		$scope.signInShow = true;
 		$scope.failedLoginShow = false;
 		$scope.userName = "mark.taylor";
 		$scope.password = "Going4ther$";
-		
+
 		$scope.loginUser = function () {
 			DHPService.token($scope.userName, $scope.password);
 		};
@@ -49,12 +49,12 @@
 			$scope.failedLoginShow = true;
 		});
 	});
-	
+
 	/* The patient controller retrieves patient demographic data and sets the $scope model for the patient view. */
 	dhp.controller('PatientController', function ($scope, DHPService) {
-	
+
 		$scope.patientShow = false;
-	
+
 		$scope.$on('Successful login', function() {
 			DHPService.patient();
 		});
@@ -109,7 +109,7 @@
 						else {
 							phones.push('other : ' + val[i]['value']);
 						}
-					}		
+					}
 					$scope.phones = phones.toString();
 					}
 				if (key === "address") {
@@ -127,7 +127,7 @@
 		});
 		$scope.$on('Successful organization', function() {
 			$scope.organization = DHPService.getOrganizationData();
-		});		
+		});
 		$scope.getPatient = function() {
 			DHPService.refreshPatient();
 		};
@@ -135,13 +135,13 @@
 			DHPService.organization(DHPService.getOrganizationId());
 		});
 	});
-	
+
 	/* The observations controller retrieves observations and sets the $scope model for the observations view. */
 	dhp.controller('ObservationsController', function ($scope, DHPService) {
 		$scope.observationsShow = false;
 		$scope.showNext = false;
 		$scope.showPrevious = false;
-		
+
 		$scope.$on('Successful patient', function () {
 			$scope.observationsShow = true;
 			DHPService.observations();
@@ -149,19 +149,19 @@
 		$scope.$on('Successful logout', function() {
 			$scope.observationsShow = false;
 		});
-		
+
 		$scope.getObservations = function() {
 			DHPService.observations();
 		};
-		
+
 		$scope.getObservationsNext = function() {
 			DHPService.observationsNext();
 		}
-		
+
 		$scope.getObservationsPrevious = function() {
 			DHPService.observationsPrevious();
 		}
-		
+
 		$scope.$on('Successful observations', function () {
 			var resultsCount;
 			var obsTable = [];
@@ -170,7 +170,7 @@
 			var linkObj = {};
 			var prevFlag;
 			var nextFlag;
-			
+
 			$.each( DHPService.getObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
 					$scope.total_results = "Total Records: " + val;
@@ -187,7 +187,7 @@
 						}
 						if (linkObj['rel'] === 'previous') {
 							prevFlag = true;
-							DHPService.setObservationsPrev(linkObj['href']);	
+							DHPService.setObservationsPrev(linkObj['href']);
 						}
 						links.push(linkObj);
 					}
@@ -196,14 +196,14 @@
 					for (i = 0; i < val.length; i++) {
 							var obs = {};
 							var vals = [];
-							
+
 							obs['id'] = k++;
-							
+
 							vals = dhpUtils.getObjects(val[i], 'display'); // getObjects(TestObj, 'id'); // Returns an array of matching objects
 							for (p=0;p<vals.length;p++) {
 								if (vals[p]['system'] === "http://loinc.org") {
 									obs['display'] = vals[p]['display'];
-								}	
+								}
 								else {
 									obs['display'] = vals[p]['display'];
 								}
@@ -241,42 +241,42 @@
 								for (p=0;p<vals.length;p++) {
 										obs['datetime'] = vals[p]['appliesDateTime'];
 								}
-							}		
-							obsTable.push(obs);		
+							}
+							obsTable.push(obs);
 					}
-				}	
+				}
 			});
 			$scope.showNext = nextFlag;
 			$scope.showPrevious = prevFlag;
 			$scope.obsTable = obsTable;
 		});
 	});
-	
+
 	//WEIGHT
 	/* The graph controller retrieves graph data and sets the $scope model for the graph view. */
 	dhp.controller('WeightGraphController', function ($scope, $window, $timeout, DHPService) {
 		$scope.graphShow = false;
-				
+
 		$scope.getWeightGraph = function() {
 			//DHPService.observationsGlucose();
 			DHPService.observationsWeight();
 		};
 
 		$scope.$on('Successful logout', function() {
-		
+
 			$timeout(function () {
 				$window.location.reload();
 			}, 2000);
-		
+
 			$scope.graphShow = false;
-			
+
 
 		});
-		
+
 		$scope.$on('Successful patient', function () {
 			$scope.graphShow = true;
 		});
-		
+
 
 		//weight observations
 		$scope.$on('weightObsSuccess', function () {
@@ -288,7 +288,7 @@
 			var linkObj = {};
 			var times = [];
 			var readings = [[],[]];
-			
+
 			$.each( DHPService.getWeightObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
 					resultsCount = val;
@@ -300,7 +300,7 @@
 							linkObj['id'] = j;
 							linkObj['href'] = val[j]['href'];
 							linkObj['rel'] = val[j]['rel'];
-							
+
 							links.push(linkObj);
 						}
 					}
@@ -310,9 +310,9 @@
 
 							var obs = {};
 							var vals = [];
-							
+
 							obs['id'] = k++;
-							
+
 							vals = dhpUtils.getObjects(val[i], 'value');
 							for (p=0;p<vals.length;p++) {
 									obs['value'] = vals[p]['value'];
@@ -323,19 +323,19 @@
 							vals = dhpUtils.getObjects(val[i], 'appliesDateTime');
 							if (vals.length > 0) {
 								for (p=0;p<vals.length;p++) {
-										obs['datetime'] = vals[p]['appliesDateTime'];
-										times.push(vals[p]['appliesDateTime']);
+										obs['datetime'] = new Date(vals[p]['appliesDateTime']).toLocaleDateString();;
+										times.push(obs['datetime']);
 								}
-							}		
-							obsList.push(obs);		
+							}
+							obsList.push(obs);
 					}
-				}	
+				}
 			});
-						
+
 			$scope.labels = times;
 			if (resultsCount > 0) {
 				$scope.series = ['Weight Observations A', 'Weight Observations B'];
-			} 
+			}
 			else {
 				$scope.nograph = "There are no weight observations for graphing."
 			}
@@ -348,26 +348,26 @@
 	/* The graph controller retrieves graph data and sets the $scope model for the graph view. */
 	dhp.controller('SleepGraphController', function ($scope, $window, $timeout, DHPService) {
 		$scope.graphShow = false;
-				
+
 		$scope.getSleepGraph = function() {
 			DHPService.observationsSleep();
 		};
 
 		$scope.$on('Successful logout', function() {
-		
+
 			$timeout(function () {
 				$window.location.reload();
 			}, 2000);
-		
+
 			$scope.graphShow = false;
-			
+
 
 		});
-		
+
 		$scope.$on('Successful patient', function () {
 			$scope.graphShow = true;
 		});
-		
+
 
 		//weight observations
 		$scope.$on('sleepObsSuccess', function () {
@@ -379,7 +379,7 @@
 			var linkObj = {};
 			var times = [];
 			var readings = [[],[]];
-			
+
 			$.each( DHPService.getSleepObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
 					resultsCount = val;
@@ -391,7 +391,7 @@
 							linkObj['id'] = j;
 							linkObj['href'] = val[j]['href'];
 							linkObj['rel'] = val[j]['rel'];
-							
+
 							links.push(linkObj);
 						}
 					}
@@ -401,9 +401,8 @@
 
 							var obs = {};
 							var vals = [];
-							
 							obs['id'] = k++;
-							
+
 							vals = dhpUtils.getObjects(val[i], 'value');
 							for (p=0;p<vals.length;p++) {
 									obs['value'] = vals[p]['value'];
@@ -414,19 +413,19 @@
 							vals = dhpUtils.getObjects(val[i], 'appliesDateTime');
 							if (vals.length > 0) {
 								for (p=0;p<vals.length;p++) {
-										obs['datetime'] = vals[p]['appliesDateTime'];
-										times.push(vals[p]['appliesDateTime']);
+										obs['datetime'] = new Date(vals[p]['appliesDateTime']).toLocaleDateString();;
+										times.push(obs['datetime']);
 								}
-							}		
-							obsList.push(obs);		
+							}
+							obsList.push(obs);
 					}
-				}	
+				}
 			});
-						
+
 			$scope.labels = times;
 			if (resultsCount > 0) {
 				$scope.series = ['Sleep Observations A', 'Sleep Observations B'];
-			} 
+			}
 			else {
 				$scope.nograph = "There are no sleep observations for graphing."
 			}
@@ -434,11 +433,11 @@
 				readings;
 		});
 	});
-	
+
 		/* The graph controller retrieves graph data and sets the $scope model for the graph view. */
 	dhp.controller('StepsGraphController', function ($scope, $window, $timeout, DHPService) {
 		$scope.graphShow = false;
-				
+
 
 		$scope.getStepsGraph = function() {
 			//DHPService.observationsGlucose();
@@ -446,16 +445,16 @@
 		};
 
 		$scope.$on('Successful logout', function() {
-		
+
 			$timeout(function () {
 				$window.location.reload();
 			}, 2000);
-		
+
 			$scope.graphShow = false;
-			
+
 
 		});
-		
+
 		$scope.$on('Successful patient', function () {
 			$scope.graphShow = true;
 		});
@@ -471,52 +470,57 @@
 			var linkObj = {};
 			var times = [];
 			var readings = [];
-			
+
 			$.each( DHPService.getStepsObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
 					resultsCount = val;
 				}
 				/* The code below can be expanded if one wanted to page the data and/or retrieve additional results. */
 				if (key === "link") {
-					for (j=0; j<val.length; j++) {
+					for (var j=0; j<val.length; j++) {
 						if (val[j]['rel'] === 'next') {
 							linkObj['id'] = j;
 							linkObj['href'] = val[j]['href'];
 							linkObj['rel'] = val[j]['rel'];
-							
+
 							links.push(linkObj);
 						}
 					}
 				}
 				if (key === "entry") {
-					for (i = 0; i < val.length; i++) {
+					for (var i = 0; i < val.length; i++) {
 
 							var obs = {};
 							var vals = [];
-							
+
 							obs['id'] = k++;
-							
+
 							vals = dhpUtils.getObjects(val[i], 'value');
-							for (p=0;p<vals.length;p++) {
+							for (var p=0;p<vals.length;p++) {
 									obs['value'] = vals[p]['value'];
 									readings.push(vals[p]['value']);
 							}
-							vals = dhpUtils.getObjects(val[i], 'appliesDateTime');
-							if (vals.length > 0) {
-								for (p=0;p<vals.length;p++) {
-										obs['datetime'] = vals[p]['appliesDateTime'];
-										times.push(vals[p]['appliesDateTime']);
-								}
-							}		
-							obsList.push(obs);		
+							// vals = dhpUtils.getObjects(val[i], 'start');
+							vals = val[i].content.appliesPeriod;
+							obs['datetime'] = new Date(vals['start']).toLocaleDateString();
+							times.push(obs['datetime']);
+							// console.log(obs['datetime'], obs['value']);
+
+							// if (vals.length > 0) {
+							// 	for (var p=0;p<vals.length;p++) {
+							// 			obs['datetime'] = new Date(vals[p]['start']).toLocaleDateString();
+							// 			times.push(vals[p]['appliesPeriod']);
+							// 	}
+							// }
+							obsList.push(obs);
 					}
-				}	
+				}
 			});
-						
+
 			$scope.labels = times;
 			if (resultsCount > 0) {
 				$scope.series = ['Steps Observations'];
-			} 
+			}
 			else {
 				$scope.nograph = "There are no steps observations for graphing."
 			}
@@ -525,4 +529,3 @@
 			  ];
 		});
 	});
-	
