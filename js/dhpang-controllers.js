@@ -575,3 +575,10 @@
 			$scope.data = [avgs];
 		});
 	});
+
+// dhp.controller("DoughnutCtrl", function ($scope) {
+// 	console.log('DoughnutCtrl');
+//   	$scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+//   	$scope.options = {responsive: false};
+//   	$scope.data = [300, 500, 100];
+// });

@@ -175,3 +175,11 @@ body {
 	  border-top-right-radius: 0;
 	}
 }
+
+.doughnuts canvas {
+    padding: 20px;
+}
+
+.d-col {
+    /*padding: 20px*/
+}

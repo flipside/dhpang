@@ -43,13 +43,13 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 	<script src="js/dhpang-constants.js"></script>
 	<script src="js/Base64.js"></script>
-	<script src="js/dhpang.js"></script>
-	<script src="js/dhpang-utils.js"></script>
-	<script src="js/dhpang-directives.js"></script>
-	<script src="js/dhpang-services.js"></script>
-	<script src="js/dhpang-controllers.js"></script>
 	<script src="js/Chart.min.js"></script>
 	<script src="js/angular-chart.js"></script>
+    <script src="js/dhpang.js"></script>
+    <script src="js/dhpang-utils.js"></script>
+    <script src="js/dhpang-directives.js"></script>
+    <script src="js/dhpang-services.js"></script>
+    <script src="js/dhpang-controllers.js"></script>
   </head>
   <!-- Declare the app as dhp -->
   <body ng-app="dhp">
@@ -124,26 +124,130 @@
           <!-- Template for displaying patient demographic information -->
         <div id="patientDiv" class="" class="patient" ng-show="patientShow" ng-controller="PatientController">
           <h2 class="sub-header">Info</h2>
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBEOEZEQiIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojRkZGRkZGO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
+          <div class="row placeholders doughnuts">
+            <div class="col-xs-6 col-sm-3 d-col">
+              <canvas id="doughnut1" class="" width="200" height="200"></canvas>
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
+              <script>
+                  var c = document.getElementById("doughnut1");
+                    var ctx = c.getContext("2d");
+                    var data = [
+                        {
+                            value: 300,
+                            color:"#F7464A",
+                            highlight: "#FF5A5E",
+                            label: "Red"
+                        },
+                        {
+                            value: 50,
+                            color: "#46BFBD",
+                            highlight: "#5AD3D1",
+                            label: "Green"
+                        },
+                        {
+                            value: 100,
+                            color: "#FDB45C",
+                            highlight: "#FFC870",
+                            label: "Yellow"
+                        }
+                    ];
+                    var myDoughnutChart = new Chart(ctx).Doughnut(data,{
+                    });
+              </script>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzM5REJBQyIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojMUUyOTJDO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
+            <div class="col-xs-6 col-sm-3  d-col">
+              <canvas id="doughnut2" class="" width="200" height="200"></canvas>
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
+              <script>
+                  var c = document.getElementById("doughnut2");
+                    var ctx = c.getContext("2d");
+                    var data = [
+                        {
+                            value: 300,
+                            color:"#F7464A",
+                            highlight: "#FF5A5E",
+                            label: "Red"
+                        },
+                        {
+                            value: 50,
+                            color: "#46BFBD",
+                            highlight: "#5AD3D1",
+                            label: "Green"
+                        },
+                        {
+                            value: 100,
+                            color: "#FDB45C",
+                            highlight: "#FFC870",
+                            label: "Yellow"
+                        }
+                    ];
+                    var myDoughnutChart = new Chart(ctx).Doughnut(data,{
+                    });
+              </script>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBEOEZEQiIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojRkZGRkZGO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
+            <div class="col-xs-6 col-sm-3  d-col">
+              <canvas id="doughnut3" class="" width="200" height="200"></canvas>
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
+              <script>
+                  var c = document.getElementById("doughnut3");
+                    var ctx = c.getContext("2d");
+                    var data = [
+                        {
+                            value: 300,
+                            color:"#F7464A",
+                            highlight: "#FF5A5E",
+                            label: "Red"
+                        },
+                        {
+                            value: 50,
+                            color: "#46BFBD",
+                            highlight: "#5AD3D1",
+                            label: "Green"
+                        },
+                        {
+                            value: 100,
+                            color: "#FDB45C",
+                            highlight: "#FFC870",
+                            label: "Yellow"
+                        }
+                    ];
+                    var myDoughnutChart = new Chart(ctx).Doughnut(data,{
+                    });
+              </script>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzM5REJBQyIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojMUUyOTJDO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
+            <div class="col-xs-6 col-sm-3 d-col">
+              <canvas id="doughnut4" class="" width="200" height="200"></canvas>
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
+              <script>
+                  var c = document.getElementById("doughnut4");
+                    var ctx = c.getContext("2d");
+                    var data = [
+                        {
+                            value: 300,
+                            color:"#F7464A",
+                            highlight: "#FF5A5E",
+                            label: "Red"
+                        },
+                        {
+                            value: 50,
+                            color: "#46BFBD",
+                            highlight: "#5AD3D1",
+                            label: "Green"
+                        },
+                        {
+                            value: 100,
+                            color: "#FDB45C",
+                            highlight: "#FFC870",
+                            label: "Yellow"
+                        }
+                    ];
+                    var myDoughnutChart = new Chart(ctx).Doughnut(data,{
+                    });
+              </script>
             </div>
           </div>
              <!-- <img src="images/PlainPhillips145x38.png" alt="Philips API's" /> -->
@@ -192,19 +296,19 @@
     	 <div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="WeightGraphController">
     	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getWeightGraph()">Get/Refresh Weight Graph</button>
     	   <div class="text-center"><div ng-nograph></div></div>
-    	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+    	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="false" series="series" click="onClick"></canvas>
     	</div>
 
     	<div id="graphDiv2" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="StepsGraphController">
     	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph2" type="button" ng-click="getStepsGraph()">Get/Refresh Steps Graph</button>
     	   <div class="text-center"><div ng-nograph></div></div>
-    	  <canvas id="line2" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+    	  <canvas id="line2" class="chart chart-line" data="data" labels="labels" legend="false" series="series" click="onClick"></canvas>
     	</div>
 
     	<div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="SleepGraphController">
     	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getSleepGraph()">Get/Refresh Sleep Graph</button>
     	   <div class="text-center"><div ng-nograph></div></div>
-    	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+    	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="false" series="series" click="onClick"></canvas>
     	</div>
     	<!-- End of graph template -->
       </div>
