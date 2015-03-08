@@ -6,10 +6,10 @@
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
+*
  * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -48,7 +48,7 @@
 	<script src="js/dhpang-directives.js"></script>
 	<script src="js/dhpang-services.js"></script>
 	<script src="js/dhpang-controllers.js"></script>
-	<script src="js/Chart.min.js"></script> 
+	<script src="js/Chart.min.js"></script>
 	<script src="js/angular-chart.js"></script>
   </head>
   <!-- Declare the app as dhp -->
@@ -57,67 +57,157 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-	<!-- Template for the initial login -->
-	<div id="signInDiv" class="wrapper" ng-controller="LoginController" ng-show="signInShow">
-    <form id="signinForm" class="form-signin">  
-	  <img src="images/philips-logo.png" alt="Philips API's" />	
-      <h2 class="form-signin-heading"></h2>
-      <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" ng-model="userName" />
-      <input type="password" class="form-control" name="password" placeholder="Password" required="" ng-model="password" />
-      <p></p>
-      <button id="loginButton" class="btn btn-lg btn-primary btn-block" type="button" ng-click="loginUser()">Login</button>
-	  <br/>
-	  <p class="text-danger" ng-show="failedLoginShow">There was an error with your login.  Please try again.</p>
-    </form>
-	</div>
-	<!-- End of intial login template -->
-	<!-- Template for displaying patient demographic information -->
-  	 <div id="patientDiv" class="container-fluid" class="patient" ng-show="patientShow" ng-controller="PatientController">
-	 <img src="images/PlainPhillips145x38.png" alt="Philips API's" />
-	 <button id="logoutButton" class="btn btn-primary pull-right" type="button" ng-click="logoutUser()">Logout</button>	
-	  <button class="btn btn-lg btn-primary btn-block" id="refreshPatient" type="button" ng-click="getPatient()">Get/Refresh Person Info</button>
-	  <div class="row"><div class="col-md-6 h4">Status</div><div class="col-md-6 h4">Gender</div></div>
-	  <div class="row">
-	  <div class="col-md-6 bg-info" ng-status>
-	  </div>
-	  <div class="col-md-6 bg-info" ng-gender>
-	  </div></div>
-	  <div class="row"><div class="col-md-6 h4">Name(s)</div><div class="col-md-6 h4">Telecom</div></div>
-	  <div class="row">
-      <div class="col-md-6  bg-info" ng-names></div>
-	  <div class="col-md-6  bg-info" ng-phones>
-	  </div></div>
-	  <div class="row"><div class="col-md-12 h4">Address(es)</div></div>
-	  <div class="row">
-	  <div class="col-md-12  bg-info" ng-addresses></div>
-	  </div>
-	  <div class="row"><div class="col-md-6 h4">Birth Date:</div><div class="col-md-6 h4">Organization</div></div>
-	  <div class="row">
-	  <div class="col-md-6  bg-info" ng-birthdate></div>
-	  <!-- Organization information - Note that this is a separate service, but included in the Patient view. -->
-	  <div class="col-md-6  bg-info" ng-organization>
-	  </div></div>
-	</div>
-	<br/>
-	<!-- End of observations template -->
-	<!-- Template for displaying graph -->
-	 <div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="WeightGraphController">
-	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getWeightGraph()">Get/Refresh Weight Graph</button>
-	   <div class="text-center"><div ng-nograph></div></div>
-	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
-	</div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">HealthCrush</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+         <img src="images/New_Walmart_Logo.svg" alt="Walmart" style="width:145px; padding-bottom:10px;"/>
+          <ul class="nav nav-sidebar">
+            <li><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Rewards</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="">Team Running Dead</a></li>
+            <li><a href="">Weight Progres</a></li>
+            <li><a href="">Steps Progres</a></li>
+            <li><a href="">Sleep Progres</a></li>
+          </ul>
+          <!-- <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul> -->
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+          <!-- Template for the initial login -->
+            <div id="signInDiv" class="wrapper" ng-controller="LoginController" ng-show="signInShow">
+                <form id="signinForm" class="form-signin">
+                  <img src="images/philips-logo.png" alt="Philips API's" />
+                  <h2 class="form-signin-heading"></h2>
+                  <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" ng-model="userName" />
+                  <input type="password" class="form-control" name="password" placeholder="Password" required="" ng-model="password" />
+                  <p></p>
+                  <button id="loginButton" class="btn btn-lg btn-primary btn-block" type="button" ng-click="loginUser()">Login</button>
+                  <br/>
+                  <p class="text-danger" ng-show="failedLoginShow">There was an error with your login.  Please try again.</p>
+                </form>
+            </div>
+            <!-- End of intial login template -->
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBEOEZEQiIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojRkZGRkZGO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzM5REJBQyIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojMUUyOTJDO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBEOEZEQiIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojRkZGRkZGO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzM5REJBQyIvPjxnPjx0ZXh0IHg9Ijc0LjA0Njg3NSIgeT0iMTAwIiBzdHlsZT0iZmlsbDojMUUyOTJDO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+          </div>
 
-	<div id="graphDiv2" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="StepsGraphController">
-	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph2" type="button" ng-click="getStepsGraph()">Get/Refresh Steps Graph</button>
-	   <div class="text-center"><div ng-nograph></div></div>
-	  <canvas id="line2" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
-	</div>
+          <h2 class="sub-header">Info</h2>
+          <!-- Template for displaying patient demographic information -->
+        <div id="patientDiv" class="" class="patient" ng-show="patientShow" ng-controller="PatientController">
+             <!-- <img src="images/PlainPhillips145x38.png" alt="Philips API's" /> -->
+<!--              <button id="logoutButton" class="btn btn-primary pull-right" type="button" ng-click="logoutUser()">Logout</button>
+ -->              <!-- <button class="btn btn-lg btn-primary btn-block" id="refreshPatient" type="button" ng-click="getPatient()">Get/Refresh Person Info</button> -->
+              <div class="row">
+                <div class="col-md-6 h4">Status</div>
+                <div class="col-md-6 h4">Gender</div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 bg-info" ng-status>
+                </div>
+                <div class="col-md-6 bg-info" ng-gender>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-6 h4">Name(s)</div>
+                    <div class="col-md-6 h4">Telecom</div>
+            </div>
+            <div class="row">
+                  <div class="col-md-6  bg-info" ng-names>
+                  </div>
+                  <div class="col-md-6  bg-info" ng-phones>
+                  </div>
+            </div>
+                <div class="row">
+                    <div class="col-md-12 h4">Address(es)</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12  bg-info" ng-addresses></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 h4">Birth Date:</div>
+                    <div class="col-md-6 h4">Organization</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6  bg-info" ng-birthdate></div>
+                  <!-- Organization information - Note that this is a separate service, but included in the Patient view. -->
+                    <div class="col-md-6  bg-info" ng-organization>
+                    </div>
+                </div>
+            <br/>
+            <!-- End of observations template -->
+        </div>
+    	<!-- Template for displaying graph -->
+    	 <div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="WeightGraphController">
+    	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getWeightGraph()">Get/Refresh Weight Graph</button>
+    	   <div class="text-center"><div ng-nograph></div></div>
+    	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+    	</div>
 
-	<div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="SleepGraphController">
-	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getSleepGraph()">Get/Refresh Sleep Graph</button>
-	   <div class="text-center"><div ng-nograph></div></div>
-	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
-	</div>
-	<!-- End of graph template -->
+    	<div id="graphDiv2" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="StepsGraphController">
+    	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph2" type="button" ng-click="getStepsGraph()">Get/Refresh Steps Graph</button>
+    	   <div class="text-center"><div ng-nograph></div></div>
+    	  <canvas id="line2" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+    	</div>
+
+    	<div id="graphDiv" class="container-fluid" class="graph" ng-show="graphShow" ng-controller="SleepGraphController">
+    	  <button class="btn btn-lg btn-primary btn-block" id="refreshGraph" type="button" ng-click="getSleepGraph()">Get/Refresh Sleep Graph</button>
+    	   <div class="text-center"><div ng-nograph></div></div>
+    	  <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas>
+    	</div>
+    	<!-- End of graph template -->
+      </div>
+    </div>
   </body>
 </html>

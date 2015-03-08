@@ -288,6 +288,7 @@
 			var linkObj = {};
 			var times = [];
 			var readings = [[],[],[],[]];
+			var avgs = [];
 
 			$.each( DHPService.getWeightObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
@@ -339,15 +340,22 @@
 				}
 			});
 
+			var avg;
+			for (i=0; i < readings[0].length; i++) {
+				avg = parseInt(readings[0][i]) + parseInt(readings[1][i]) + parseInt(readings[2][i]) + parseInt(readings[3][i]);
+				// console.log(avg);
+				avgs.push((avg/4).toFixed(2));
+			}
 			$scope.labels = times;
 			if (resultsCount > 0) {
-				$scope.series = ["Mark's Weight", "Tom's Weight", "Travis' Weight", "Simon's Weight"];
+				// $scope.series = ["Mark's Weight", "Tom's Weight", "Travis' Weight", "Simon's Weight"];
+				$scope.series = ["Average Team Weight"];
 			}
 			else {
 				$scope.nograph = "There are no weight observations for graphing."
 			}
 			$scope.options = {datasetFill: false};
-			$scope.data = readings;
+			$scope.data = [avgs];
 		});
 	});
 
@@ -386,6 +394,7 @@
 			var linkObj = {};
 			var times = [];
 			var readings = [[], [], [], []];
+			var avgs = [];
 
 			$.each( DHPService.getSleepObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
@@ -409,6 +418,7 @@
 							var obs = {};
 							var vals = [];
 							var value;
+							// var avg;
 							obs['id'] = k++;
 
 							vals = dhpUtils.getObjects(val[i], 'value');
@@ -418,7 +428,7 @@
 									readings[1].push((value + (value / 23 * Math.sin(i * 23 + 5)) + (value / 19 * Math.cos(i/41))).toFixed(2));
 									readings[2].push((value + (value / 24 * Math.cos(i * 32)) + (value / 19 * Math.sin(-i/31))).toFixed(2));
 									readings[3].push((value + (value / 25 * Math.sin(i * 42)) + (value / 19 * Math.sin(i/21))).toFixed(2));
-
+									// avgs.push(((readings[0][i] + readings[1][i] + readings[2][i] + readings[3][i])/4).toFixed(2));
 							}
 							vals = dhpUtils.getObjects(val[i], 'appliesDateTime');
 							if (vals.length > 0 && i%7==0) {
@@ -433,15 +443,25 @@
 					}
 				}
 			});
-
+			// console.log(readings);
+			var avg;
+			for (i=0; i < readings[0].length; i++) {
+				avg = parseInt(readings[0][i]) + parseInt(readings[1][i]) + parseInt(readings[2][i]) + parseInt(readings[3][i]);
+				// console.log(avg);
+				avgs.push((avg/4).toFixed(2));
+			}
 			$scope.labels = times;
 			if (resultsCount > 0) {
-				$scope.series = ["Mark's Sleep", "Tom's Sleep", "Travis' Sleep", "Simon's Sleep"];
+				// $scope.series = ["Mark's Sleep", "Tom's Sleep", "Travis' Sleep", "Simon's Sleep"];
+				$scope.series = ["Team Sleep Average"];
 			}
 			else {
 				$scope.nograph = "There are no sleep observations for graphing."
 			}
-			$scope.data = readings;
+
+
+
+			$scope.data = [avgs];
 		});
 	});
 
@@ -481,6 +501,7 @@
 			var linkObj = {};
 			var times = [];
 			var readings = [[],[],[],[]];
+			var avgs = [];
 
 			$.each( DHPService.getStepsObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
@@ -536,13 +557,21 @@
 				}
 			});
 
+			var avg;
+			for (i=0; i < readings[0].length; i++) {
+				avg = parseInt(readings[0][i]) + parseInt(readings[1][i]) + parseInt(readings[2][i]) + parseInt(readings[3][i]);
+				// console.log(avg);
+				avgs.push((avg/4).toFixed(2));
+			}
+
 			$scope.labels = times;
 			if (resultsCount > 0) {
-				$scope.series = ["Mark's Steps", "Tom's Steps", "Travis' Steps", "Simon's Steps"];
+				// $scope.series = ["Mark's Steps", "Tom's Steps", "Travis' Steps", "Simon's Steps"];
+				$scope.series = ["Average Team Steps"];
 			}
 			else {
 				$scope.nograph = "There are no steps observations for graphing."
 			}
-			$scope.data = readings;
+			$scope.data = [avgs];
 		});
 	});
