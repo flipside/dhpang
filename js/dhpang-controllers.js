@@ -287,7 +287,7 @@
 			var links = [];
 			var linkObj = {};
 			var times = [];
-			var readings = [[],[]];
+			var readings = [[],[],[],[]];
 
 			$.each( DHPService.getWeightObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
@@ -310,22 +310,29 @@
 
 							var obs = {};
 							var vals = [];
+							var value;
 
 							obs['id'] = k++;
 
 							vals = dhpUtils.getObjects(val[i], 'value');
 							for (p=0;p<vals.length;p++) {
-									obs['value'] = vals[p]['value'];
-									readings[0].push(vals[p]['value']);
-									readings[1].push(vals[p]['value']*.9);
-
+									value = obs['value'] = vals[p]['value'];
+									readings[0].push(value);
+									readings[1].push(value + 20 - Math.round(i/20)*5);
+									readings[2].push(value - 5 - Math.round((i+4)/13)*2);
+									readings[3].push(value + 3 - Math.round(i/13)*3);
+									// readings[1].push((value + (value / 20 * Math.sin(i * 23 + 5)) + (value / 19 * Math.cos(i/41))).toFixed(2));
+									// readings[2].push((value + (value / 20 * Math.cos(i * 32)) + (value / 19 * Math.sin(-i/31))).toFixed(2));
+									// readings[3].push((value + (value / 20 * Math.sin(i * 42)) + (value / 19 * Math.sin(i/21))).toFixed(2));
 							}
 							vals = dhpUtils.getObjects(val[i], 'appliesDateTime');
-							if (vals.length > 0) {
+							if (vals.length > 0 && i%7 == 0) {
 								for (p=0;p<vals.length;p++) {
 										obs['datetime'] = new Date(vals[p]['appliesDateTime']).toLocaleDateString();;
 										times.push(obs['datetime']);
 								}
+							} else {
+								times.push('');
 							}
 							obsList.push(obs);
 					}
@@ -334,13 +341,13 @@
 
 			$scope.labels = times;
 			if (resultsCount > 0) {
-				$scope.series = ['Weight Observations A', 'Weight Observations B'];
+				$scope.series = ["Mark's Weight", "Tom's Weight", "Travis' Weight", "Simon's Weight"];
 			}
 			else {
 				$scope.nograph = "There are no weight observations for graphing."
 			}
-			$scope.data =
-				readings;
+			$scope.options = {datasetFill: false};
+			$scope.data = readings;
 		});
 	});
 
@@ -378,7 +385,7 @@
 			var links = [];
 			var linkObj = {};
 			var times = [];
-			var readings = [[],[]];
+			var readings = [[], [], [], []];
 
 			$.each( DHPService.getSleepObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
@@ -401,21 +408,26 @@
 
 							var obs = {};
 							var vals = [];
+							var value;
 							obs['id'] = k++;
 
 							vals = dhpUtils.getObjects(val[i], 'value');
 							for (p=0;p<vals.length;p++) {
-									obs['value'] = vals[p]['value'];
+									value = obs['value'] = vals[p]['value'];
 									readings[0].push(vals[p]['value']);
-									readings[1].push(vals[p]['value']*.9);
+									readings[1].push((value + (value / 23 * Math.sin(i * 23 + 5)) + (value / 19 * Math.cos(i/41))).toFixed(2));
+									readings[2].push((value + (value / 24 * Math.cos(i * 32)) + (value / 19 * Math.sin(-i/31))).toFixed(2));
+									readings[3].push((value + (value / 25 * Math.sin(i * 42)) + (value / 19 * Math.sin(i/21))).toFixed(2));
 
 							}
 							vals = dhpUtils.getObjects(val[i], 'appliesDateTime');
-							if (vals.length > 0) {
+							if (vals.length > 0 && i%7==0) {
 								for (p=0;p<vals.length;p++) {
 										obs['datetime'] = new Date(vals[p]['appliesDateTime']).toLocaleDateString();;
 										times.push(obs['datetime']);
 								}
+							} else {
+								times.push('');
 							}
 							obsList.push(obs);
 					}
@@ -424,13 +436,12 @@
 
 			$scope.labels = times;
 			if (resultsCount > 0) {
-				$scope.series = ['Sleep Observations A', 'Sleep Observations B'];
+				$scope.series = ["Mark's Sleep", "Tom's Sleep", "Travis' Sleep", "Simon's Sleep"];
 			}
 			else {
 				$scope.nograph = "There are no sleep observations for graphing."
 			}
-			$scope.data =
-				readings;
+			$scope.data = readings;
 		});
 	});
 
@@ -469,7 +480,7 @@
 			var links = [];
 			var linkObj = {};
 			var times = [];
-			var readings = [];
+			var readings = [[],[],[],[]];
 
 			$.each( DHPService.getStepsObservationsData(), function( key, val ) {
 				if (key === "totalResults") {
@@ -492,18 +503,26 @@
 
 							var obs = {};
 							var vals = [];
+							var value;
 
 							obs['id'] = k++;
 
 							vals = dhpUtils.getObjects(val[i], 'value');
 							for (var p=0;p<vals.length;p++) {
-									obs['value'] = vals[p]['value'];
-									readings.push(vals[p]['value']);
+									value = obs['value'] = vals[p]['value'];
+									readings[0].push(vals[p]['value']);
+									readings[1].push((value + (value / 20 * Math.sin(i * 23 + 5)) + (value / 19 * Math.cos(i/41))).toFixed(2));
+									readings[2].push((value + (value / 20 * Math.cos(i * 32)) + (value / 19 * Math.sin(-i/31))).toFixed(2));
+									readings[3].push((value + (value / 20 * Math.sin(i * 42)) + (value / 19 * Math.sin(i/21))).toFixed(2));
 							}
 							// vals = dhpUtils.getObjects(val[i], 'start');
 							vals = val[i].content.appliesPeriod;
 							obs['datetime'] = new Date(vals['start']).toLocaleDateString();
-							times.push(obs['datetime']);
+							if (i%0 == 7) {
+								times.push(obs['datetime']);
+							} else {
+								times.push('');
+							}
 							// console.log(obs['datetime'], obs['value']);
 
 							// if (vals.length > 0) {
@@ -519,13 +538,11 @@
 
 			$scope.labels = times;
 			if (resultsCount > 0) {
-				$scope.series = ['Steps Observations'];
+				$scope.series = ["Mark's Steps", "Tom's Steps", "Travis' Steps", "Simon's Steps"];
 			}
 			else {
 				$scope.nograph = "There are no steps observations for graphing."
 			}
-			$scope.data = [
-				readings
-			  ];
+			$scope.data = readings;
 		});
 	});
