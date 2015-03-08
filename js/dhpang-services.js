@@ -187,7 +187,7 @@
 			};
 		this.observationsSteps = function() {
 		$http({
-			url: BASE_URL_OBSERVATION + '?subject:_id=' + patient_id + '&name=' + STEPS_LOINC + '&_sort:asc=date&_count=200',
+			url: BASE_URL_OBSERVATION + '?subject:_id=' + patient_id + '&name=' + STEPS_LOINC + '&_sort:asc=date&_count=50',
 			method: "GET",
 			headers: {'Authorization':'Bearer ' + accessToken,'Accept':'application/json'}
 			}).success(function (data, status, headers, config) {
@@ -201,7 +201,7 @@
 
 		this.observationsSleep = function() {
 		$http({
-			url: BASE_URL_OBSERVATION + '?subject:_id=' + patient_id + '&name=' + SLEEP_LOINC + '&_sort:asc=date&_count=200',
+			url: BASE_URL_OBSERVATION + '?subject:_id=' + patient_id + '&name=' + SLEEP_LOINC + '&_sort:asc=date&_count=50',
 			method: "GET",
 			headers: {'Authorization':'Bearer ' + accessToken,'Accept':'application/json'}
 			}).success(function (data, status, headers, config) {
